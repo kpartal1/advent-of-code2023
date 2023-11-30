@@ -32,4 +32,3 @@ cargo run --release 1
 ```
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and the code for handling environment arguments).
->>>>>>> master
