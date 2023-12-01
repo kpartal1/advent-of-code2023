@@ -1,6 +1,6 @@
 use std::{
     env, iter,
-    time::{self, Duration},
+    time::{Duration, Instant},
 };
 
 mod advent;
@@ -10,9 +10,7 @@ mod advent;
 /// This will panic if the enviroment arguments are not input to specification.
 /// The args specification can be found in `README.md` under `Usage`
 /// # Example
-/// ```
-/// cargo run --release 1a 17 23b
-/// ```
+/// `cargo run --release 1a 17 23b`
 fn main() {
     let args: Vec<String> = env::args().collect();
     let days: Vec<_> = match args.len() {
@@ -34,9 +32,9 @@ fn main() {
             }
         }
         println!("Day {}:", day);
-        let start = time::Instant::now();
+        let start = Instant::now();
         println!("{}", advent::day(day, a, b));
-        let end = time::Instant::now();
+        let end = Instant::now();
         println!("Duration: {:?}", end - start);
         total_duration += end - start;
     }
