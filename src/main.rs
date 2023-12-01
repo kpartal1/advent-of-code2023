@@ -1,5 +1,5 @@
 use std::{
-    env,
+    env, iter,
     time::{self, Duration},
 };
 
@@ -16,7 +16,7 @@ mod advent;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let days: Vec<_> = match args.len() {
-        1 => (1..=25).zip(None).collect(),
+        1 => (1..=25).zip(iter::repeat(None)).collect(),
         _ => args
             .iter()
             .skip(1)
