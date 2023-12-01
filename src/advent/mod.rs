@@ -36,7 +36,7 @@ pub fn day(n: u8, a: bool, b: bool) -> String {
             23 => days::day23::run,
             24 => days::day24::run,
             25 => days::day25::run,
-            _ => todo!(),
+            _ => panic!("Invalid day, must be in the range [1,25]."),
         };
         day_func(input, a, b)
     } else {

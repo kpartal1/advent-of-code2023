@@ -4,6 +4,7 @@ use std::{
 };
 
 mod advent;
+const NUM_RUNS: u32 = 1_000;
 
 /// Main function that reads environment arguments and runs advent days.
 /// # Panics
@@ -21,7 +22,7 @@ fn main() {
             .map(|d| (d.get(0..1).unwrap().parse().unwrap(), d.get(1..2)))
             .collect(),
     };
-    let mut total_duration = Duration::default();
+    let mut avg_duration = Duration::default();
     for (day, ab) in days {
         let (mut a, mut b) = (true, true);
         if let Some(ab) = ab {
@@ -32,11 +33,13 @@ fn main() {
             }
         }
         println!("Day {}:", day);
-        let start = Instant::now();
         println!("{}", advent::day(day, a, b));
-        let end = Instant::now();
-        println!("Duration: {:?}", end - start);
-        total_duration += end - start;
+        let start_avg = Instant::now();
+        for _ in 0..NUM_RUNS {
+            advent::day(day, a, b);
+        }
+        let end_avg = Instant::now();
+        avg_duration += end_avg - start_avg;
     }
-    println!("Total Duration: {:?}", total_duration);
+    println!("Average Duration: {:?}", avg_duration / NUM_RUNS);
 }
