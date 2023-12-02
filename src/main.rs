@@ -22,7 +22,9 @@ fn main() {
             .map(|d| (d.get(0..1).unwrap().parse().unwrap(), d.get(1..2)))
             .collect(),
     };
+    let n = days.len();
     let mut avg_duration = Duration::default();
+    let mut tot_duration = Duration::default();
     for (day, ab) in days {
         let (mut a, mut b) = (true, true);
         if let Some(ab) = ab {
@@ -33,13 +35,24 @@ fn main() {
             }
         }
         println!("Day {}:", day);
+        let start_tot = Instant::now();
         println!("{}", advent::day(day, a, b));
-        let start_avg = Instant::now();
-        for _ in 0..NUM_RUNS {
-            advent::day(day, a, b);
+        let end_tot = Instant::now();
+        println!("Duration: {:?}", end_tot - start_tot);
+        if n == 1 {
+            let start_avg = Instant::now();
+            for _ in 0..NUM_RUNS {
+                advent::day(day, a, b);
+            }
+            let end_avg = Instant::now();
+            avg_duration += end_avg - start_avg;
+        } else if n == 25 {
+            tot_duration += end_tot - start_tot;
         }
-        let end_avg = Instant::now();
-        avg_duration += end_avg - start_avg;
     }
-    println!("Average Duration: {:?}", avg_duration / NUM_RUNS);
+    if n == 1 {
+        println!("Average Duration: {:?}", avg_duration / NUM_RUNS);
+    } else if n == 25 {
+        println!("Total Duration: {:?}", tot_duration);
+    }
 }

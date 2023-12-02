@@ -61,12 +61,13 @@ The output will show the answers for the specified days and parts and the final 
 Here is an example input and output:
 
 ```
-Day 1:
-Part a: 54573
-Day 4:
-Part a: Unimplemented
-Part b: Unimplemented
-Average Duration: 145.158µs
+# Input
+cargo run --release 2
+# Output
+Day 2:
+Part a: 2268
+Part b: 63542
+Average Duration: 405.898µs
 ```
 
 Big O Analysis
