@@ -15,19 +15,13 @@ I will record my times for each problem here (*hopefully* same hardware every da
 
 This will be averaged over a few thousand runs.
 
+Setting a new goal for myself because I saw a blog post about it: all problems within less than 1 second total. We'll see how that goes.
+
 | Day | a     | b     | Both  |
 |-----|-------|-------|-------|
 | 1   | 110µs | 1.4ms | 1.5ms |
+| 2   | 200µs | 250µs | 415µs |
 
-Big O Analysis
---------------
-
-Day 1: I think my solution to part (a) is O(2n) because it scans forward and backwards to find the first then the last numeric characters and then indexes the string for those values. Part (b) is more complicated, but I think it is O(kn) where k is the length of the number string, so O(144n) because there are 36 letters in the numbers one through nine and it goes through twice, also for each of these it goes through one more time to check for a numeric character. This honestly might be an underestimate. So technically these are both O(n) but this might explain why part (b) is so agonizingly slow.
-
-Notes
------
-
-Day 1: I'm not super happy with the performance of part (b), I can imagine some ways to make it faster, but it's late at night and it took me long enough to make the function lol. Focusing on positives though, I didn't do too bad, and part (a) is a nice and elegant solution. Most important thing is: I learned something! Turns out Option::None is always greater than Option::Some(T), seemingly explicitly for cases like the one I encountered when doing part (b), so that's super interesting! Also tonight I've listened to the entirety of Utopia and Vespertine by Björk which I enjoyed so all around wins tonight. Looking forward to tomorrow.
 
 Usage
 -----
@@ -74,5 +68,23 @@ Part a: Unimplemented
 Part b: Unimplemented
 Average Duration: 145.158µs
 ```
+
+Big O Analysis
+--------------
+
+### Day 1: 
+I think my solution to part (a) is O(2n) where n is the length of a string because it scans forward and backwards to find the first then the last numeric characters and then indexes the string for those values. Part (b) is more complicated, but I think it is O(kn) where k is the length of the number string and n is the length of the code string, so O(144n) because there are 36 letters in the numbers one through nine and it goes through twice, also for each of these it goes through one more time to check for a numeric character. This honestly might be an underestimate. So technically these are both O(n) but this might explain why part (b) is so agonizingly slow. Also these are both multiplied by the number of strings in the list, but I wanted to analyze specifically the process for one string in the list.
+
+### Day 2: 
+Both solutions are O(kn) where n is the length of the string and k is the number of strings. Both of the solutions just fold linearly over the whole collection and return the number. So O(n) for both.
+
+Notes
+-----
+
+### Day 1:
+I'm not super happy with the performance of part (b), I can imagine some ways to make it faster, but it's late at night and it took me long enough to make the function lol. Focusing on positives though, I didn't do too bad, and part (a) is a nice and elegant solution. Most important thing is: I learned something! Turns out Option::None is always greater than Option::Some(T), seemingly explicitly for cases like the one I encountered when doing part (b), so that's super interesting! Also tonight I've listened to the entirety of Utopia and Vespertine by Björk which I enjoyed so all around wins tonight. Looking forward to tomorrow.
+
+### Day 2
+I might need to chill out with my desire to answer the problems in functional ways because a few for loops might've made this easier and my code more readable. I liked these problems though. I had to finish them later in the day though because I wasn't at home for the problem drop, so L. Now I don't know where I would've been on the leaderboards.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
