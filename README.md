@@ -20,7 +20,8 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | Day | a     | b     | Both  |
 |-----|-------|-------|-------|
 | 1   | 110µs | 1.4ms | 1.5ms |
-| 2   | 200µs | 250µs | 415µs |
+| 2   | 190µs | 230µs | 400µs |
+| 3   | 430µs | 360µs | 760µs |
 
 
 Usage
@@ -79,6 +80,9 @@ I think my solution to part (a) is O(2n) where n is the length of a string becau
 ### Day 2: 
 Both solutions are O(kn) where n is the length of the string and k is the number of strings. Both of the solutions just fold linearly over the whole collection and return the number. So O(n) for both.
 
+### Day 3:
+Both solutions are O(n<sup>3k</sup>) where n is the length of the strings and k is the number of important pieces of the string (numbers and special character (not .)). It starts as O(n) when it reads in the strings as a vec of vec that keeps the words and special characters with their indices. Then it goes through each vec in the vec and checks if the previous and next contain any overlaps. Thus, for each n vecs in the vec, it checks 3k items for overlap.
+
 Notes
 -----
 
@@ -87,5 +91,8 @@ I'm not super happy with the performance of part (b), I can imagine some ways to
 
 ### Day 2
 I might need to chill out with my desire to answer the problems in functional ways because a few for loops might've made this easier and my code more readable. I liked these problems though. I had to finish them later in the day though because I wasn't at home for the problem drop, so L. Now I don't know where I would've been on the leaderboards.
+
+### Day 3
+This was hard!!! My solution is so ugly but I am proud that I got it to work at all. Took me far longer than I was expecting or hoping for but its not the end of the world and I'm trying to focus on positivity recently so it's cool that I finished it at all! Hoping for a good day 4.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).

@@ -4,7 +4,7 @@ use std::{
 };
 
 mod advent;
-const NUM_RUNS: u32 = 1_000;
+const NUM_RUNS: u32 = 10_000;
 
 /// Main function that reads environment arguments and runs advent days.
 /// # Panics
