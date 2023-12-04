@@ -45,9 +45,9 @@ fn main() {
                 advent::day(day, a, b);
             }
             let end_avg = Instant::now();
-            avg_duration += end_avg - start_avg;
+            avg_duration = end_avg - start_avg;
         } else if n == 25 {
-            tot_duration += end_tot - start_tot;
+            tot_duration = end_tot - start_tot;
         }
     }
     if n == 1 {
