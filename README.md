@@ -24,6 +24,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 3   | 430µs | 360µs | 760µs |
 | 4   | 250µs | 260µs | 480µs |
 | 5   | 65µs  | 120µs | 150µs |
+| 6   | 45µs  | 42µs  | 49µs  |
 
 Usage
 -----
@@ -90,6 +91,9 @@ Technically both algorithms are O(n<sup>2</sup>) (kinda O(n<sup>3</sup>) because
 ### Day 5:
 Pretty sure that these are both O(kn) where n is the number of seeds and k is the length of the longest map. This is because for each seed, we go through each map to find the new seed value. Technically O(kn<sup>2</sup>) because we have to do this for every line, but I'm looking more granularly at how we operate on each map rather than on the whole dataset. For part (b) n is actually the number of pairs of seeds and the complexity is more like O(n<sup>2</sup>) because of the way the intervals break off from each other and expand.
 
+### Day 6:
+This algorithm is O(1) because it uses math to get the answer. I was initially using a binary search which is O(log(n)), but I found a solution that explained how to find the answer using math, and it's pretty simple too its just the quadratic formula! I should probably go back and see how I can optimize day 1...
+
 Notes
 -----
 
@@ -107,5 +111,8 @@ Really enjoyed this problem. Learned very concretely how prefix sum works and wh
 
 ### Day 5:
 This problem was hard, but I'm satisfied with my answer! I especially enjoyed part (b) because I initially did it in a way that would've taken a *really* long time to run. Once I optimized it though, it's one of the fastest parts of the days I've done so far. I find that super cool because optimizing these problems is one of the goals I have for AoC this year.
+
+### Day 6:
+This problem was easier finally! I brute forced it initially because I wanted to get a good ranking on the leaderboard, but after lots of optimization and finding out you can use math (thank you [Dragon-Hatcher](https://github.com/Dragon-Hatcher) on GitHub) to find the answer, I got it running super fast and with accurate results. So now this is my fastest solution, very cool!
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
