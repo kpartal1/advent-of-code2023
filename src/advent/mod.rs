@@ -3,8 +3,6 @@ use std::fs;
 mod days;
 
 /// Runs the advent of code problem for a specific day
-/// # Panics
-/// Panics if input isn't `0 < n ≤ 25`
 pub fn day(n: u8, a: bool, b: bool) -> String {
     let path = format!("src/inputs/day{:02}.txt", n);
     let input = fs::read_to_string(&path);

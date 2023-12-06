@@ -15,11 +15,20 @@ const NUM_RUNS: u32 = 10_000;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let days: Vec<_> = match args.len() {
-        1 => (1..=25).zip(iter::repeat(None)).collect(),
+        1 => (1..=25).zip(iter::repeat(String::new())).collect(),
         _ => args
             .iter()
             .skip(1)
-            .map(|d| (d.get(0..1).unwrap().parse().unwrap(), d.get(1..2)))
+            .map(|d| {
+                (
+                    d.chars()
+                        .take_while(|c| c.is_numeric())
+                        .collect::<String>()
+                        .parse()
+                        .unwrap(),
+                    d.chars().skip_while(|c| c.is_numeric()).collect::<String>(),
+                )
+            })
             .collect(),
     };
     let n = days.len();
@@ -27,12 +36,10 @@ fn main() {
     let mut tot_duration = Duration::default();
     for (day, ab) in days {
         let (mut a, mut b) = (true, true);
-        if let Some(ab) = ab {
-            if ab == "a" {
-                b = false;
-            } else if ab == "b" {
-                a = false;
-            }
+        if ab == "a" {
+            b = false;
+        } else if ab == "b" {
+            a = false;
         }
         println!("Day {}:", day);
         let start_tot = Instant::now();

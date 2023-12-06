@@ -10,7 +10,7 @@ pub fn run(input: &str, a: bool, b: bool) -> String {
 }
 
 fn part_a(input: &str) -> String {
-    let mut lines = input.split("\n\n");
+    let mut lines = input.split("\r\n\r\n");
     let mut seeds: Vec<u64> = lines
         .next()
         .unwrap()
@@ -18,7 +18,7 @@ fn part_a(input: &str) -> String {
         .filter_map(|s| s.parse().ok())
         .collect();
     for line in lines {
-        let map = line
+        let mut map = line
             .lines()
             .skip(1)
             .map(|l| {
@@ -28,6 +28,7 @@ fn part_a(input: &str) -> String {
                 (l.next().unwrap(), l.next().unwrap(), l.next().unwrap())
             })
             .collect::<Vec<_>>();
+        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(&b));
         seeds.iter_mut().for_each(|seed| {
             for (d, s, l) in &map {
                 if (s..&(s + l)).contains(&&*seed) {
@@ -41,7 +42,7 @@ fn part_a(input: &str) -> String {
 }
 
 fn part_b(input: &str) -> String {
-    let mut lines = input.split("\n\n");
+    let mut lines = input.split("\r\n\r\n");
     let seeds: Vec<u64> = lines
         .next()
         .unwrap()
@@ -60,7 +61,7 @@ fn part_b(input: &str) -> String {
                 (l.next().unwrap(), l.next().unwrap(), l.next().unwrap())
             })
             .collect::<Vec<_>>();
-        map.sort_unstable_by(|a, b| a.1.cmp(&b.1));
+        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(&b));
         seeds = seeds
             .into_iter()
             .map(|v| {
@@ -97,9 +98,8 @@ fn part_b(input: &str) -> String {
     }
     seeds
         .into_iter()
-        .flatten()
-        .min_by(|a, b| a.0.cmp(&b.0))
+        .flat_map(|s| s.into_iter().map(|(x, _)| x))
+        .min()
         .unwrap()
-        .0
         .to_string()
 }

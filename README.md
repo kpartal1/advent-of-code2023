@@ -23,6 +23,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 2   | 190µs | 230µs | 400µs |
 | 3   | 430µs | 360µs | 760µs |
 | 4   | 250µs | 260µs | 480µs |
+| 5   | 65µs  | 120µs | 150µs |
 
 Usage
 -----
@@ -86,6 +87,9 @@ Both solutions are O(n<sup>3k</sup>) where n is the length of the strings and k 
 ### Day 4:
 Technically both algorithms are O(n<sup>2</sup>) (kinda O(n<sup>3</sup>) because we do it for each line but its ok) because we compare all pairs of the winning numbers and the checker numbers. This could be "optimized" to be O(n) using set intersections, but since the arrays are only ever like 20 long, its faster to use the n<sup>2</sup> algorithm. There is also a prefix sum in part (b) which adds a second iteration over [0, n).
 
+### Day 5:
+Pretty sure that these are both O(kn) where n is the number of seeds and k is the length of the longest map. This is because for each seed, we go through each map to find the new seed value. Technically O(kn<sup>2</sup>) because we have to do this for every line, but I'm looking more granularly at how we operate on each map rather than on the whole dataset.
+
 Notes
 -----
 
@@ -100,5 +104,8 @@ This was hard!!! My solution is so ugly but I am proud that I got it to work at 
 
 ### Day 4:
 Really enjoyed this problem. Learned very concretely how prefix sum works and when to use it. In part (b), it felt like such a cool realization that I just "invented" prefix sum before I realized that what I was doing was prefix sum. Also, I was using HashSet intersections initially and it was fun to "optimize" that away into a brute n<sup>2</sup> check. I also just tried an O(nlogn) check and it was slower! I guess the overhead of sorting the Vec is worse than just doing direct comparison. Listening to some new Björk, Drawing Restraint #9, this is weird but I'm also kinda digging it and its cool to hear sounds that made their way into Volta, especially Vertebrae by Vertebrae. It really shows off the time and work that goes into making music.
+
+### Day 5:
+This problem was hard, but I'm satisfied with my answer! I especially enjoyed part (b) because I initially did it in a way that would've taken a *really* long time to run. Once I optimized it though, it's one of the fastest parts of the days I've done so far. I find that super cool because optimizing these problems is one of the goals I have for AoC this year.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
