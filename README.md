@@ -88,7 +88,7 @@ Both solutions are O(n<sup>3k</sup>) where n is the length of the strings and k 
 Technically both algorithms are O(n<sup>2</sup>) (kinda O(n<sup>3</sup>) because we do it for each line but its ok) because we compare all pairs of the winning numbers and the checker numbers. This could be "optimized" to be O(n) using set intersections, but since the arrays are only ever like 20 long, its faster to use the n<sup>2</sup> algorithm. There is also a prefix sum in part (b) which adds a second iteration over [0, n).
 
 ### Day 5:
-Pretty sure that these are both O(kn) where n is the number of seeds and k is the length of the longest map. This is because for each seed, we go through each map to find the new seed value. Technically O(kn<sup>2</sup>) because we have to do this for every line, but I'm looking more granularly at how we operate on each map rather than on the whole dataset.
+Pretty sure that these are both O(kn) where n is the number of seeds and k is the length of the longest map. This is because for each seed, we go through each map to find the new seed value. Technically O(kn<sup>2</sup>) because we have to do this for every line, but I'm looking more granularly at how we operate on each map rather than on the whole dataset. For part (b) n is actually the number of pairs of seeds and the complexity is more like O(n<sup>2</sup>) because of the way the intervals break off from each other and expand.
 
 Notes
 -----
