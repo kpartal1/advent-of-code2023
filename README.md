@@ -17,15 +17,16 @@ This will be averaged over a few thousand runs.
 
 Setting a new goal for myself because I saw a blog post about it: all problems within less than 1 second total. We'll see how that goes.
 
-| Day | a     | b     | Both  |
-|-----|-------|-------|-------|
-| 1   | 110µs | 1.4ms | 1.5ms |
-| 2   | 190µs | 230µs | 400µs |
-| 3   | 430µs | 360µs | 760µs |
-| 4   | 250µs | 260µs | 480µs |
-| 5   | 65µs  | 120µs | 150µs |
-| 6   | 45µs  | 42µs  | 49µs  |
-| 7   | 2ms   | 2ms   | 4ms   |
+| Day   | a     | b     | Both  |
+|-------|-------|-------|-------|
+| 1     | 110µs | 1.4ms | 1.5ms |
+| 2     | 190µs | 230µs | 400µs |
+| 3     | 430µs | 360µs | 760µs |
+| 4     | 250µs | 260µs | 480µs |
+| 5     | 65µs  | 120µs | 150µs |
+| 6     | 45µs  | 42µs  | 49µs  |
+| 7     | 2ms   | 2ms   | 4ms   |
+| Total |       |       |       |
 
 Usage
 -----
