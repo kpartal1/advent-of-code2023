@@ -49,7 +49,8 @@ fn byte_to_strength_b(b: u8) -> usize {
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug)]
-enum Kind {
+#[allow(clippy::enum_variant_names)]
+enum Type {
     HighCard,
     OnePair,
     TwoPair,
@@ -59,145 +60,137 @@ enum Kind {
     FiveOfAKind,
 }
 
-fn classify_hand_a(h: &str) -> (Kind, &str) {
-    let mut counts = vec![0; 13];
-    for b in h.bytes().map(|b| byte_to_strength_a(b)) {
+fn classify_hand_a(h: &str) -> (Type, &str) {
+    let mut counts = [0; 13];
+    for b in h.bytes().map(byte_to_strength_a) {
         counts[b] += 1;
     }
-    let kind = match counts.iter().max() {
-        Some(5) => Kind::FiveOfAKind,
-        Some(4) => Kind::FourOfAKind,
+    let t = match counts.iter().max() {
+        Some(5) => Type::FiveOfAKind,
+        Some(4) => Type::FourOfAKind,
         Some(3) => {
             if counts.contains(&2) {
-                Kind::FullHouse
+                Type::FullHouse
             } else {
-                Kind::ThreeOfAKind
+                Type::ThreeOfAKind
             }
         }
         Some(2) => {
             if counts.iter().filter(|&&x| x == 2).count() == 2 {
-                Kind::TwoPair
+                Type::TwoPair
             } else {
-                Kind::OnePair
+                Type::OnePair
             }
         }
-        Some(1) => Kind::HighCard,
-        _ => Kind::HighCard,
+        Some(1) => Type::HighCard,
+        _ => Type::HighCard,
     };
-    (kind, h)
+    (t, h)
 }
 
-fn classify_hand_b(h: &str) -> (Kind, &str) {
-    let mut counts = vec![0; 13];
-    for b in h.bytes().map(|b| byte_to_strength_b(b)) {
+fn classify_hand_b(h: &str) -> (Type, &str) {
+    let mut counts = [0; 13];
+    for b in h.bytes().map(byte_to_strength_b) {
         counts[b] += 1;
     }
     let js = counts[0];
     counts[0] = 0;
-    let kind = match counts.iter().max() {
-        Some(5) => Kind::FiveOfAKind,
+    let t = match counts.iter().max() {
+        Some(5) => Type::FiveOfAKind,
         Some(4) => {
             if js == 1 {
-                Kind::FiveOfAKind
+                Type::FiveOfAKind
             } else {
-                Kind::FourOfAKind
+                Type::FourOfAKind
             }
         }
         Some(3) => {
             if js == 2 {
-                Kind::FiveOfAKind
+                Type::FiveOfAKind
             } else if js == 1 {
-                Kind::FourOfAKind
+                Type::FourOfAKind
+            } else if counts.contains(&2) {
+                Type::FullHouse
             } else {
-                if counts.contains(&2) {
-                    Kind::FullHouse
-                } else {
-                    Kind::ThreeOfAKind
-                }
+                Type::ThreeOfAKind
             }
         }
         Some(2) => {
             if js == 3 {
-                Kind::FiveOfAKind
+                Type::FiveOfAKind
             } else if js == 2 {
-                Kind::FourOfAKind
+                Type::FourOfAKind
             } else if js == 1 {
                 if counts.iter().filter(|&&x| x == 2).count() == 2 {
-                    Kind::FullHouse
+                    Type::FullHouse
                 } else {
-                    Kind::ThreeOfAKind
+                    Type::ThreeOfAKind
                 }
+            } else if counts.iter().filter(|&&x| x == 2).count() == 2 {
+                Type::TwoPair
             } else {
-                if counts.iter().filter(|&&x| x == 2).count() == 2 {
-                    Kind::TwoPair
-                } else {
-                    Kind::OnePair
-                }
+                Type::OnePair
             }
         }
         Some(1) => {
             if js == 4 {
-                Kind::FiveOfAKind
+                Type::FiveOfAKind
             } else if js == 3 {
-                Kind::FourOfAKind
+                Type::FourOfAKind
             } else if js == 2 {
-                Kind::ThreeOfAKind
+                Type::ThreeOfAKind
             } else if js == 1 {
-                Kind::OnePair
+                Type::OnePair
             } else {
-                Kind::HighCard
+                Type::HighCard
             }
         }
-        Some(0) => Kind::FiveOfAKind,
-        _ => Kind::HighCard,
+        Some(0) => Type::FiveOfAKind,
+        _ => Type::HighCard,
     };
-    (kind, h)
+    (t, h)
 }
 
-fn order_kinds_a((k, h): (Kind, &str), (ok, oh): (Kind, &str)) -> Ordering {
-    if k > ok {
-        Ordering::Greater
-    } else if k < ok {
-        Ordering::Less
-    } else {
-        for (b1, b2) in h
-            .bytes()
-            .map(|b| byte_to_strength_a(b))
-            .zip(oh.bytes().map(|b| byte_to_strength_a(b)))
-        {
-            if b1 > b2 {
-                return Ordering::Greater;
-            } else if b1 < b2 {
-                return Ordering::Less;
+fn order_types_a((k, h): (Type, &str), (ok, oh): (Type, &str)) -> Ordering {
+    match k.cmp(&ok) {
+        Ordering::Equal => {
+            for (b1, b2) in h
+                .bytes()
+                .map(byte_to_strength_a)
+                .zip(oh.bytes().map(byte_to_strength_a))
+            {
+                match b1.cmp(&b2) {
+                    Ordering::Equal => continue,
+                    o => return o,
+                }
             }
+            Ordering::Equal
         }
-        Ordering::Equal
+        o => o,
     }
 }
 
-fn order_kinds_b((k, h): (Kind, &str), (ok, oh): (Kind, &str)) -> Ordering {
-    if k > ok {
-        Ordering::Greater
-    } else if k < ok {
-        Ordering::Less
-    } else {
-        for (b1, b2) in h
-            .bytes()
-            .map(|b| byte_to_strength_b(b))
-            .zip(oh.bytes().map(|b| byte_to_strength_b(b)))
-        {
-            if b1 > b2 {
-                return Ordering::Greater;
-            } else if b1 < b2 {
-                return Ordering::Less;
+fn order_types_b((k, h): (Type, &str), (ok, oh): (Type, &str)) -> Ordering {
+    match k.cmp(&ok) {
+        Ordering::Equal => {
+            for (b1, b2) in h
+                .bytes()
+                .map(byte_to_strength_b)
+                .zip(oh.bytes().map(byte_to_strength_b))
+            {
+                match b1.cmp(&b2) {
+                    Ordering::Equal => continue,
+                    o => return o,
+                }
             }
+            Ordering::Equal
         }
-        Ordering::Equal
+        o => o,
     }
 }
 
 fn part_a(input: &str) -> String {
-    let mut hands: Vec<((Kind, &str), u32)> = input
+    let mut hands: Vec<((Type, &str), u32)> = input
         .lines()
         .collect::<Vec<_>>()
         .par_iter()
@@ -207,7 +200,7 @@ fn part_a(input: &str) -> String {
         })
         .map(|(h, b)| (classify_hand_a(h), b))
         .collect();
-    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_kinds_a(h, oh));
+    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_types_a(h, oh));
     hands
         .into_iter()
         .zip(1..)
@@ -216,7 +209,7 @@ fn part_a(input: &str) -> String {
 }
 
 fn part_b(input: &str) -> String {
-    let mut hands: Vec<((Kind, &str), u32)> = input
+    let mut hands: Vec<((Type, &str), u32)> = input
         .lines()
         .collect::<Vec<_>>()
         .par_iter()
@@ -226,7 +219,7 @@ fn part_b(input: &str) -> String {
         })
         .map(|(h, b)| (classify_hand_b(h), b))
         .collect();
-    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_kinds_b(h, oh));
+    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_types_b(h, oh));
     hands
         .iter()
         .zip(1..)

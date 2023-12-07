@@ -5,7 +5,7 @@ mod days;
 /// Runs the advent of code problem for a specific day
 pub fn day(n: u8, a: bool, b: bool) -> String {
     let path = format!("src/inputs/day{:02}.txt", n);
-    let input = fs::read_to_string(&path);
+    let input = fs::read_to_string(path);
     if let Ok(input) = input {
         let input = input.trim();
         let day_func = match n {

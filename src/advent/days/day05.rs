@@ -28,7 +28,7 @@ fn part_a(input: &str) -> String {
                 (l.next().unwrap(), l.next().unwrap(), l.next().unwrap())
             })
             .collect::<Vec<_>>();
-        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(&b));
+        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(b));
         seeds.iter_mut().for_each(|seed| {
             for (d, s, l) in &map {
                 if (s..&(s + l)).contains(&&*seed) {
@@ -61,7 +61,7 @@ fn part_b(input: &str) -> String {
                 (l.next().unwrap(), l.next().unwrap(), l.next().unwrap())
             })
             .collect::<Vec<_>>();
-        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(&b));
+        map.sort_unstable_by(|(_, a, _), (_, b, _)| a.cmp(b));
         seeds = seeds
             .into_iter()
             .map(|v| {

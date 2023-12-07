@@ -16,26 +16,26 @@ fn part_a(input: &str) -> String {
             let mut number = String::with_capacity(3);
             let mut reading = false;
             for (i, c) in l.chars().enumerate() {
-                if !reading && ('0'..='9').contains(&c) && i == l.len() - 1 {
+                if !reading && c.is_ascii_digit() && i == l.len() - 1 {
                     number.push(c);
                     first = i;
                     last = i;
                     nums.push(((first, last), number.parse::<u32>().ok()));
-                } else if !reading && ('0'..='9').contains(&c) {
+                } else if !reading && c.is_ascii_digit() {
                     number.push(c);
                     first = i;
                     last = i;
                     reading = true;
                 } else if !reading && c != '.' {
                     nums.push(((i, i), None));
-                } else if reading && ('0'..='9').contains(&c) && i == l.len() - 1 {
+                } else if reading && c.is_ascii_digit() && i == l.len() - 1 {
                     number.push(c);
                     last = i;
                     nums.push(((first, last), number.parse::<u32>().ok()));
-                } else if reading && ('0'..='9').contains(&c) {
+                } else if reading && c.is_ascii_digit() {
                     number.push(c);
                     last = i;
-                } else if reading && !('0'..='9').contains(&c) {
+                } else if reading && !c.is_ascii_digit() {
                     nums.push(((first, last), number.parse::<u32>().ok()));
                     number = String::new();
                     reading = false;
@@ -63,8 +63,7 @@ fn part_a(input: &str) -> String {
                     ] {
                         if info[w]
                             .iter()
-                            .find(|((f, l), sym)| (f..=l).contains(&&k) && sym.is_none())
-                            .is_some()
+                            .any(|((f, l), sym)| (f..=l).contains(&&k) && sym.is_none())
                         {
                             found = true;
                             sum += num;
@@ -90,26 +89,26 @@ fn part_b(input: &str) -> String {
             let mut number = String::with_capacity(3);
             let mut reading = false;
             for (i, c) in l.chars().enumerate() {
-                if !reading && ('0'..='9').contains(&c) && i == l.len() - 1 {
+                if !reading && c.is_ascii_digit() && i == l.len() - 1 {
                     number.push(c);
                     first = i;
                     last = i;
                     nums.push(((first, last), number.parse::<u32>().ok()));
-                } else if !reading && ('0'..='9').contains(&c) {
+                } else if !reading && c.is_ascii_digit() {
                     number.push(c);
                     first = i;
                     last = i;
                     reading = true;
                 } else if !reading && c == '*' {
                     nums.push(((i, i), None));
-                } else if reading && ('0'..='9').contains(&c) && i == l.len() - 1 {
+                } else if reading && c.is_ascii_digit() && i == l.len() - 1 {
                     number.push(c);
                     last = i;
                     nums.push(((first, last), number.parse::<u32>().ok()));
-                } else if reading && ('0'..='9').contains(&c) {
+                } else if reading && c.is_ascii_digit() {
                     number.push(c);
                     last = i;
-                } else if reading && !('0'..='9').contains(&c) {
+                } else if reading && !c.is_ascii_digit() {
                     nums.push(((first, last), number.parse::<u32>().ok()));
                     number = String::new();
                     reading = false;
@@ -125,7 +124,7 @@ fn part_b(input: &str) -> String {
     for i in 0..info.len() {
         for j in 0..info[i].len() {
             let ((x, y), num) = &info[i][j];
-            if let None = num {
+            if num.is_none() {
                 let x = if *x == 0 { 0 } else { x - 1 };
                 let y = if *y == info.len() - 1 { *y } else { y + 1 };
                 let mut visited = std::collections::HashSet::new();
