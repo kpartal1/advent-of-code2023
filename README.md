@@ -25,6 +25,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 4   | 250µs | 260µs | 480µs |
 | 5   | 65µs  | 120µs | 150µs |
 | 6   | 45µs  | 42µs  | 49µs  |
+| 7   | 2ms   | 2ms   | 4ms   |
 
 Usage
 -----
@@ -94,6 +95,9 @@ Pretty sure that these are both O(kn) where n is the number of seeds and k is th
 ### Day 6:
 This algorithm is O(1) because it uses math to get the answer. I was initially using a binary search which is O(log(n)), but I found a solution that explained how to find the answer using math, and it's pretty simple too its just the quadratic formula! I should probably go back and see how I can optimize day 1...
 
+### Day 7:
+This algorithm is O(nlog(n)) because it sorts the list to get the orders of the hands. Initially, it goes through each hand and finds its kind. Then it sorts that list based on a custom comparator function which is either O(1) or O(n), so I guess technically worst case the sorting is O(n<sup>2</sup>log(n)), but that's not the realistic case.
+
 Notes
 -----
 
@@ -114,5 +118,8 @@ This problem was hard, but I'm satisfied with my answer! I especially enjoyed pa
 
 ### Day 6:
 This problem was easier finally! I brute forced it initially because I wanted to get a good ranking on the leaderboard, but after lots of optimization and finding out you can use math (thank you [Dragon-Hatcher](https://github.com/Dragon-Hatcher) on GitHub) to find the answer, I got it running super fast and with accurate results. So now this is my fastest solution, very cool!
+
+### Day 7:
+I used parallel iteration for the first time in this problem, which I think is pretty cool. It was super easy because of the Rayon crate so thanks to the creators and contributors of that. But overall fun problem, I really enjoyed working on it! It does kinda suck that the runtime is so slow, 4ms for both parts, but I assume it'll get worse as AoC continues, and the parallelization got rid of a whole millisecond, so whatever! I wonder if there's a faster way to do this problem?
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
