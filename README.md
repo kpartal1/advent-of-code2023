@@ -26,6 +26,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 5     | 65µs  | 120µs | 150µs |
 | 6     | 45µs  | 42µs  | 49µs  |
 | 7     | 2ms   | 2ms   | 4ms   |
+| 8     | 360µs | 2.3ms | 2.6ms |
 | Total |       |       |       |
 
 Usage
@@ -99,6 +100,9 @@ This algorithm is O(1) because it uses math to get the answer. I was initially u
 ### Day 7:
 This algorithm is O(nlog(n)) because it sorts the list to get the orders of the hands. Initially, it goes through each hand and finds its kind. Then it sorts that list based on a custom comparator function which is either O(1) or O(n), so I guess technically worst case the sorting is O(n<sup>2</sup>log(n)), but that's not the realistic case.
 
+### Day 8:
+Honestly I'm not sure what the time complexity of this one is. I wanna say O(n) but n is the length of the path taken by the nodes. Then part (b) would be O(5n) which explains the runtime difference because in this case n is pretty large.
+
 Notes
 -----
 
@@ -122,5 +126,8 @@ This problem was easier finally! I brute forced it initially because I wanted to
 
 ### Day 7:
 I used parallel iteration for the first time in this problem, which I think is pretty cool. It was super easy because of the Rayon crate so thanks to the creators and contributors of that. But overall fun problem, I really enjoyed working on it! It does kinda suck that the runtime is so slow, 4ms for both parts, but I assume it'll get worse as AoC continues, and the parallelization got rid of a whole millisecond, so whatever! I wonder if there's a faster way to do this problem?
+
+### Day 8
+This was horrendously difficult for me for some reason tonight. But I soldiered through and got it working after hours of trying. The worst part was that I knew I needed the lcm, but I just thought you could multiply the numbers together and get the lcm lol. So that led me down a massive path of bigints in rust because I was running into overflows (makes sense when you multiply like 6 massive numbers together) and I was trying out different crates and I kept thinking I was gonna need to completely change the approach I was using, but eventually I took a peek at GitHub user [BarrensZeppelin](https://github.com/BarrensZeppelin)'s solution and realized that lcm isn't the same thing as multiplying numbers together and it all clicked that I was right all along lol.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
