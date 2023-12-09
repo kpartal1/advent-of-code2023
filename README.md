@@ -27,6 +27,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 6     | 45µs  | 42µs  | 49µs  |
 | 7     | 2ms   | 2ms   | 4ms   |
 | 8     | 360µs | 2.3ms | 2.6ms |
+| 9     | 200µs | 200µs | 370µs |
 | Total |       |       |       |
 
 Usage
@@ -103,6 +104,9 @@ This algorithm is O(nlog(n)) because it sorts the list to get the orders of the 
 ### Day 8:
 Honestly I'm not sure what the time complexity of this one is. I wanna say O(n) but n is the length of the path taken by the nodes. Then part (b) would be O(5n) which explains the runtime difference because in this case n is pretty large.
 
+### Day 9:
+These are O(n<sup>k</sup>) where n is the length of the sequence and k is the number of iterations until all numbers in the sequence are 0. This is worst case n. So, the worst case scenario is O(n<sup>n</sup>).
+
 Notes
 -----
 
@@ -129,5 +133,8 @@ I used parallel iteration for the first time in this problem, which I think is p
 
 ### Day 8
 This was horrendously difficult for me for some reason tonight. But I soldiered through and got it working after hours of trying. The worst part was that I knew I needed the lcm, but I just thought you could multiply the numbers together and get the lcm lol. So that led me down a massive path of bigints in rust because I was running into overflows (makes sense when you multiply like 6 massive numbers together) and I was trying out different crates and I kept thinking I was gonna need to completely change the approach I was using, but eventually I took a peek at GitHub user [BarrensZeppelin](https://github.com/BarrensZeppelin)'s solution and realized that lcm isn't the same thing as multiplying numbers together and it all clicked that I was right all along lol.
+
+### Day 9
+This one was cool. I liked that the solutions were identical but you just had to reverse the input. I especially like my solution because I do it in O(1) space complexity. I edit the values of the sequence directly which saves space and probably cache efficiency too.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
