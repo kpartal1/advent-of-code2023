@@ -28,6 +28,7 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 7     | 2ms   | 2ms   | 4ms   |
 | 8     | 360µs | 2.3ms | 2.6ms |
 | 9     | 200µs | 200µs | 370µs |
+| 10    | 420µs | 1.9ms | 2.4ms |
 | Total |       |       |       |
 
 Usage
@@ -107,6 +108,9 @@ Honestly I'm not sure what the time complexity of this one is. I wanna say O(n) 
 ### Day 9:
 These are O(n<sup>k</sup>) where n is the length of the sequence and k is the number of iterations until all numbers in the sequence are 0. This is worst case n. So, the worst case scenario is O(n<sup>n</sup>).
 
+### Day 10:
+Part (a) should be O(n) where n is the number of pipes because the setup takes O(n) to make the structure and then the algorithm for the path is O(k) where k is the length of the path. Part (b) though is more complicated. I think its O(n) as well because its the same set up, but then you go through each line again and check if its next or previous is below it. So its just O(n) with a far larger constant.
+
 Notes
 -----
 
@@ -131,10 +135,13 @@ This problem was easier finally! I brute forced it initially because I wanted to
 ### Day 7:
 I used parallel iteration for the first time in this problem, which I think is pretty cool. It was super easy because of the Rayon crate so thanks to the creators and contributors of that. But overall fun problem, I really enjoyed working on it! It does kinda suck that the runtime is so slow, 4ms for both parts, but I assume it'll get worse as AoC continues, and the parallelization got rid of a whole millisecond, so whatever! I wonder if there's a faster way to do this problem?
 
-### Day 8
+### Day 8:
 This was horrendously difficult for me for some reason tonight. But I soldiered through and got it working after hours of trying. The worst part was that I knew I needed the lcm, but I just thought you could multiply the numbers together and get the lcm lol. So that led me down a massive path of bigints in rust because I was running into overflows (makes sense when you multiply like 6 massive numbers together) and I was trying out different crates and I kept thinking I was gonna need to completely change the approach I was using, but eventually I took a peek at GitHub user [BarrensZeppelin](https://github.com/BarrensZeppelin)'s solution and realized that lcm isn't the same thing as multiplying numbers together and it all clicked that I was right all along lol.
 
-### Day 9
+### Day 9:
 This one was cool. I liked that the solutions were identical but you just had to reverse the input. I especially like my solution because I do it in O(1) space complexity. I edit the values of the sequence directly which saves space and probably cache efficiency too.
+
+### Day 10:
+This was so so difficult because it's so easy to make minor mistakes when writing the algorithm and that got me too many times. Sleep time.
 
 Thank you to GitHub user [ageron](https://github.com/ageron) for the inspiration for this idea (and a lot of the code lol <3).
