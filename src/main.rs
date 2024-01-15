@@ -4,7 +4,7 @@ use std::{
 };
 
 mod advent;
-const NUM_RUNS: u32 = 1_000;
+const NUM_RUNS: u32 = 10_000;
 
 /// Main function that reads environment arguments and runs advent days.
 /// # Panics
@@ -54,7 +54,7 @@ fn main() {
             let end_avg = Instant::now();
             avg_duration = end_avg - start_avg;
         } else if n == 25 {
-            tot_duration = end_tot - start_tot;
+            tot_duration += end_tot - start_tot;
         }
     }
     if n == 1 {

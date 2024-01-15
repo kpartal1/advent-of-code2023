@@ -24,8 +24,8 @@ Setting a new goal for myself because I saw a blog post about it: all problems w
 | 3     | 430µs | 360µs | 760µs |
 | 4     | 250µs | 260µs | 480µs |
 | 5     | 65µs  | 120µs | 150µs |
-| 6     | 45µs  | 42µs  | 49µs  |
-| 7     | 2ms   | 2ms   | 4ms   |
+| 6     | 36µs  | 36µs  | 36µs  |
+| 7     | 370µs | 360µs | 700µs |
 | 8     | 360µs | 2.3ms | 2.6ms |
 | 9     | 200µs | 200µs | 370µs |
 | 10    | 420µs | 1.9ms | 2.4ms |
@@ -133,7 +133,7 @@ This problem was hard, but I'm satisfied with my answer! I especially enjoyed pa
 This problem was easier finally! I brute forced it initially because I wanted to get a good ranking on the leaderboard, but after lots of optimization and finding out you can use math (thank you [Dragon-Hatcher](https://github.com/Dragon-Hatcher) on GitHub) to find the answer, I got it running super fast and with accurate results. So now this is my fastest solution, very cool!
 
 ### Day 7:
-I used parallel iteration for the first time in this problem, which I think is pretty cool. It was super easy because of the Rayon crate so thanks to the creators and contributors of that. But overall fun problem, I really enjoyed working on it! It does kinda suck that the runtime is so slow, 4ms for both parts, but I assume it'll get worse as AoC continues, and the parallelization got rid of a whole millisecond, so whatever! I wonder if there's a faster way to do this problem?
+I used parallel iteration for the first time in this problem, which I think is pretty cool. It was super easy because of the Rayon crate so thanks to the creators and contributors of that. But overall fun problem, I really enjoyed working on it! It does kinda suck that the runtime is so slow, 4ms for both parts, but I assume it'll get worse as AoC continues, and the parallelization got rid of a whole millisecond, so whatever! I wonder if there's a faster way to do this problem? Many many days later I have returned to this and got rid of the parallelization because I don't want to use any for this and also the times are completely different I must've been running it in debug instead of release mode oops lol.
 
 ### Day 8:
 This was horrendously difficult for me for some reason tonight. But I soldiered through and got it working after hours of trying. The worst part was that I knew I needed the lcm, but I just thought you could multiply the numbers together and get the lcm lol. So that led me down a massive path of bigints in rust because I was running into overflows (makes sense when you multiply like 6 massive numbers together) and I was trying out different crates and I kept thinking I was gonna need to completely change the approach I was using, but eventually I took a peek at GitHub user [BarrensZeppelin](https://github.com/BarrensZeppelin)'s solution and realized that lcm isn't the same thing as multiplying numbers together and it all clicked that I was right all along lol.

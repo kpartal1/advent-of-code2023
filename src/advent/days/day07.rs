@@ -1,4 +1,3 @@
-use rayon::prelude::*;
 use std::cmp::Ordering;
 
 pub fn run(input: &str, a: bool, b: bool) -> String {
@@ -193,14 +192,14 @@ fn part_a(input: &str) -> String {
     let mut hands: Vec<((Type, &str), u32)> = input
         .lines()
         .collect::<Vec<_>>()
-        .par_iter()
+        .into_iter()
         .map(|l| {
             let mut hb = l.split_whitespace();
             (hb.next().unwrap(), hb.next().unwrap().parse().unwrap())
         })
         .map(|(h, b)| (classify_hand_a(h), b))
         .collect();
-    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_types_a(h, oh));
+    hands.sort_unstable_by(|&(h, _), &(oh, _)| order_types_a(h, oh));
     hands
         .into_iter()
         .zip(1..)
@@ -212,14 +211,14 @@ fn part_b(input: &str) -> String {
     let mut hands: Vec<((Type, &str), u32)> = input
         .lines()
         .collect::<Vec<_>>()
-        .par_iter()
+        .into_iter()
         .map(|l| {
             let mut hb = l.split_whitespace();
             (hb.next().unwrap(), hb.next().unwrap().parse().unwrap())
         })
         .map(|(h, b)| (classify_hand_b(h), b))
         .collect();
-    hands.par_sort_unstable_by(|&(h, _), &(oh, _)| order_types_b(h, oh));
+    hands.sort_unstable_by(|&(h, _), &(oh, _)| order_types_b(h, oh));
     hands
         .iter()
         .zip(1..)

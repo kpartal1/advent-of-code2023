@@ -7,10 +7,10 @@ pub fn run(input: &str, a: bool, b: bool) -> String {
     }
 }
 
-fn part_a(input: &str) -> String {
+fn part_a(_input: &str) -> String {
     String::from("Unimplemented")
 }
 
-fn part_b(input: &str) -> String {
+fn part_b(_input: &str) -> String {
     String::from("Unimplemented")
 }
